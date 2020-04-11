@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +131,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameAssets\Images\Building\City.png" />
+    <Content Include="GameAssets\Images\Building\Farm.png" />
+    <Content Include="GameAssets\Images\Menu\Menu.png" />
+    <Content Include="GameAssets\Javascript\Main.js" />
+    <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
