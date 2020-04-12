@@ -153,6 +153,7 @@
     <Content Include="GameAssets\Images\Terrain\MountainCopper.png" />
     <Content Include="GameAssets\Images\Terrain\MountainIron.png" />
     <Content Include="GameAssets\Images\Terrain\Water.png" />
+    <Content Include="GameAssets\Javascript\Classes\Building.js" />
     <Content Include="GameAssets\Javascript\Classes\City.js" />
     <Content Include="GameAssets\Javascript\Classes\Farm.js" />
     <Content Include="GameAssets\Javascript\Classes\GameState.js" />
