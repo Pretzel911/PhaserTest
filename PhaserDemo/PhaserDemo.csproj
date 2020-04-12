@@ -144,6 +144,7 @@
     <Content Include="GameAssets\Images\Building\RoadRightTop.png" />
     <Content Include="GameAssets\Images\Building\RoadTopBottom.png" />
     <Content Include="GameAssets\Images\Building\RoadTopLeft.png" />
+    <Content Include="GameAssets\Images\Building\Forest.png" />
     <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="GameAssets\Images\Menu\Menu.png" />
     <Content Include="GameAssets\Javascript\Classes\City.js" />

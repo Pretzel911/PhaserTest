@@ -22,6 +22,8 @@ function preload() {
     this.load.image('MenuMenu', 'GameAssets/Images/Menu/Menu.png');
     this.load.image('BuildingCity', 'GameAssets/Images/Building/City.png');
     this.load.image('BuildingFarm', 'GameAssets/Images/Building/Farm.png');
+    this.load.image('BuildingRoadLeftRight', 'GameAssets/Images/Building/RoadLeftRight.png');
+    this.load.image('BuildingForest', 'GameAssets/Images/Building/Forest.png');
 }
 
 function create() {
@@ -46,9 +48,24 @@ function CreateMenu() {
             PlaceBuilding(pointer,"BuildingFarm");
         });
     });
+
+    var menuBuildingRoad = gameState.state.physics.add.image(50, 130, 'BuildingRoadLeftRight').setInteractive();
+    menuBuildingRoad.on('pointerup', function (pointer) {
+        gameState.map.on('pointerup', function (pointer) {
+            PlaceBuilding(pointer, "BuildingRoadLeftRight");
+        });
+    });
+
+    var menuBuildingForest = gameState.state.physics.add.image(50, 170, 'BuildingForest').setInteractive();
+    menuBuildingForest.on('pointerup', function (pointer) {
+        gameState.map.on('pointerup', function (pointer) {
+            PlaceBuilding(pointer, "BuildingForest");
+        });
+    });
+    //TODO remove menu item events when click on different menu item
 }
 function CreateTileHighlighter() {
-    var graphics = gameState.state.add.graphics({ lineStyle: { width: 2, color: 0xffffff }, fillStyle: { color: 0xffffff } });
+    var graphics = gameState.state.add.graphics({ lineStyle: { width: 2, color: 0xffffff } });
     var rect = new Phaser.Geom.Rectangle();
     gameState.state.input.on('pointermove', function (pointer) {
         graphics.clear();
@@ -58,7 +75,8 @@ function CreateTileHighlighter() {
         rect.width = selectedTile.width;
         rect.height = selectedTile.height;
         var area = Phaser.Geom.Rectangle.Area(rect);
-        graphics.strokeRectShape(rect);
+        graphics.fillStyle(0xFFFFFF, .5);
+        graphics.fillRectShape(rect);
     });
     
 }
