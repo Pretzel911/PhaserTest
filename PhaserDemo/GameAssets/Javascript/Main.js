@@ -114,7 +114,7 @@ function PlaceBuilding(pointer, BuildingName) {
 //Main Timer
 var mainTimer;
 function StartMainTimer() {
-    mainTimer = setInterval(function () { PerformMainTimerTick(); }, 5000);
+    mainTimer = setInterval(function () { PerformMainTimerTick(); }, 24000);
 }
 function StopMainTimer() {
     mainTimer.clearInterval();

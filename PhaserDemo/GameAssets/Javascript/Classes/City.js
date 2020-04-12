@@ -12,35 +12,37 @@
     PerformPopulationGrowth() {
         switch (this.GrowthRate) {
             case "meager":
-                if (this.foodReserve > .5 * (this.population)) {
-                    this.population += this.population * (0.2);
+                if (this.foodReserve >= .5 * (this.population)) {
                     this.foodReserve -= .5 * (this.population);
+                    this.population += this.population * (0.02);
                 }
                 else {
-                    this.population = this.population - (.1 * (this.foodReserve - (.5 * this.population)));
+                    this.population = this.population - (.05 * ((.5 * this.population) - this.foodReserve));
                     this.foodReserve = 0;
                 }
                 break;
             case "abundant":
-                if (this.foodReserve > (2.5 * this.population)) {
-                    this.population += this.population * (0.10);
+                if (this.foodReserve >= (2.5 * this.population)) {
                     this.foodReserve -= 2.5 * (this.population);
+                    this.population += this.population * (0.10);
                 }
                 else {
-                    this.population = this.population - (.1 * (this.foodReserve - (2.5 * this.population)));
+                    this.population = this.population - (.05 * ((2.5 * this.population) - this.foodReserve));
                     this.foodReserve = 0;
                 }
                 break;
             case "standard":
-                if (this.foodReserve > (this.population)) {
-                    this.population += this.population * (0.05);
+                if (this.foodReserve >= (this.population)) {
                     this.foodReserve -= this.population;
+                    this.population += this.population * (0.05);
                 }
                 else {
-                    this.population = this.population - (.1 * (this.foodReserve - (this.population)));
+                    this.population = this.population - (.05 * ((this.population) - this.foodReserve));
                     this.foodReserve = 0;
                 }
         }
+        this.population = Math.floor(this.population);
+        this.foodReserve = Math.floor(this.foodReserve);
     }
     setGrowthRate(selectedGrowthRate) {
         if (selectedGrowthRate === 2) {
