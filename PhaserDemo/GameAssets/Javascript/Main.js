@@ -23,7 +23,21 @@ function preload() {
     this.load.image('BuildingCity', 'GameAssets/Images/Building/City.png');
     this.load.image('BuildingFarm', 'GameAssets/Images/Building/Farm.png');
     this.load.image('BuildingRoadLeftRight', 'GameAssets/Images/Building/RoadLeftRight.png');
-    this.load.image('BuildingForest', 'GameAssets/Images/Building/Forest.png');
+    this.load.image('BuildingRoad3WayLeftBottomRight', 'GameAssets/Images/Building/Road3WayLeftBottomRight.png');
+    this.load.image('BuildingRoad3WayLeftTopBottom', 'GameAssets/Images/Building/Road3WayLeftTopBottom.png');
+    this.load.image('BuildingRoad3WayLeftTopRight', 'GameAssets/Images/Building/Road3WayLeftTopRight.png');
+    this.load.image('BuildingRoad3WayTopBottomRight', 'GameAssets/Images/Building/Road3WayTopBottomRight.png');
+    this.load.image('BuildingRoadCrossRoad', 'GameAssets/Images/Building/RoadCrossRoad.png');
+    this.load.image('BuildingRoadLeftBottom', 'GameAssets/Images/Building/RoadLeftBottom.png');
+    this.load.image('BuildingRoadRightBottom', 'GameAssets/Images/Building/RoadRightBottom.png');
+    this.load.image('BuildingRoadRightTop', 'GameAssets/Images/Building/RoadRightTop.png');
+    this.load.image('BuildingRoadTopBottom', 'GameAssets/Images/Building/RoadTopBottom.png');
+    this.load.image('BuildingRoadTopLeft', 'GameAssets/Images/Building/RoadRoadTopLeft.png');
+    this.load.image('TerrainJungle', 'GameAssets/Images/Terrain/Jungle.png');
+    this.load.image('TerrainMountain', 'GameAssets/Images/Terrain/Mountain.png');
+    this.load.image('TerrainMountainCopper', 'GameAssets/Images/Terrain/MountainCopper.png');
+    this.load.image('TerrainMountainIron', 'GameAssets/Images/Terrain/MountainIron.png');
+    this.load.image('TerrainHorses', 'GameAssets/Images/Terrain/Horses.png');
 }
 
 function create() {
@@ -56,12 +70,12 @@ function CreateMenu() {
         });
     });
 
-    var menuBuildingForest = gameState.state.physics.add.image(50, 170, 'BuildingForest').setInteractive();
-    menuBuildingForest.on('pointerup', function (pointer) {
-        gameState.map.on('pointerup', function (pointer) {
-            PlaceBuilding(pointer, "BuildingForest");
-        });
-    });
+    //var menuBuildingForest = gameState.state.physics.add.image(50, 170, 'BuildingForest').setInteractive();
+    //menuBuildingForest.on('pointerup', function (pointer) {
+    //    gameState.map.on('pointerup', function (pointer) {
+    //        PlaceBuilding(pointer, "BuildingForest");
+    //    });
+    //});
     //TODO remove menu item events when click on different menu item
 }
 function CreateTileHighlighter() {

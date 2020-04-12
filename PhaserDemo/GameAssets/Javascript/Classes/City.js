@@ -5,7 +5,7 @@
         this.graphic = null;
         this.citiesFarm = new Array();
         this.foodReserve = 0;
-        this.GrowthRate = ""; //Set cities growth rate, changes population growth formula (meager, standard, abundant) Use more food to increase population rate
+        this.GrowthRate = ""; //Set cities growth rate, changes population growth formula (meager, standard, abundant) Use more food to increase population growth rate
     }
     //Run this to make city population to grow
     populationGroth() {
