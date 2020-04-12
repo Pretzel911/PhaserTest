@@ -146,11 +146,13 @@
     <Content Include="GameAssets\Images\Building\RoadTopLeft.png" />
     <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="GameAssets\Images\Menu\Menu.png" />
+    <Content Include="GameAssets\Images\Terrain\Grass.png" />
     <Content Include="GameAssets\Images\Terrain\Horses.png" />
     <Content Include="GameAssets\Images\Terrain\Jungle.png" />
     <Content Include="GameAssets\Images\Terrain\Mountain.png" />
     <Content Include="GameAssets\Images\Terrain\MountainCopper.png" />
     <Content Include="GameAssets\Images\Terrain\MountainIron.png" />
+    <Content Include="GameAssets\Images\Terrain\Water.png" />
     <Content Include="GameAssets\Javascript\Classes\Building.js" />
     <Content Include="GameAssets\Javascript\Classes\City.js" />
     <Content Include="GameAssets\Javascript\Classes\Farm.js" />
