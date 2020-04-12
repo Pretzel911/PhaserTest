@@ -1,14 +1,15 @@
-﻿class City {
+﻿class City extends Building {
     constructor() {
-        this.name = "";
+        super();
         this.population = 0;
-        this.graphic = null;
-        this.citiesFarm = new Array();
         this.foodReserve = 0;
-        this.GrowthRate = ""; //Set cities growth rate, changes population growth formula (meager, standard, abundant) Use more food to increase population growth rate
+        this.GrowthRate = "standard"; //Set cities growth rate, changes population growth formula (meager, standard, abundant) Use more food to increase population growth rate
+    }
+    PerformCityTick() {
+        this.PerformPopulationGrowth();
     }
     //Run this to make city population to grow
-    populationGroth() {
+    PerformPopulationGrowth() {
         switch (this.GrowthRate) {
             case "meager":
                 if (this.foodReserve > .5 * (this.population)) {

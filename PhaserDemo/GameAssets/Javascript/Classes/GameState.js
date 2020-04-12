@@ -3,7 +3,7 @@
         this.state = null;
         this.menu = null;
         this.map = null;
-        this.cities = new Array();
+        this.buildings = new Array();
 
         //Tiles Stuff
         this.tiles = null;
@@ -47,5 +47,13 @@
             }
         }
     }
-
+    //Tick Events
+    PerformTick() {
+        for (var i = 0; i < this.buildings.length; i++) {
+            if (this.buildings[i].buildingType === "BuildingCity") {
+                this.buildings[i].PerformCityTick();
+                console.log(this.buildings[i]);
+            }
+        }
+    }
 }

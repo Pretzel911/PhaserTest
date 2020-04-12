@@ -32,7 +32,7 @@ function preload() {
     this.load.image('BuildingRoadRightBottom', 'GameAssets/Images/Building/RoadRightBottom.png');
     this.load.image('BuildingRoadRightTop', 'GameAssets/Images/Building/RoadRightTop.png');
     this.load.image('BuildingRoadTopBottom', 'GameAssets/Images/Building/RoadTopBottom.png');
-    this.load.image('BuildingRoadTopLeft', 'GameAssets/Images/Building/RoadRoadTopLeft.png');
+    this.load.image('BuildingRoadTopLeft', 'GameAssets/Images/Building/RoadTopLeft.png');
     this.load.image('TerrainJungle', 'GameAssets/Images/Terrain/Jungle.png');
     this.load.image('TerrainMountain', 'GameAssets/Images/Terrain/Mountain.png');
     this.load.image('TerrainMountainCopper', 'GameAssets/Images/Terrain/MountainCopper.png');
@@ -45,38 +45,22 @@ function create() {
     gameState.state = this;
     CreateMenu();
     CreateTileHighlighter();
-    console.log(gameState);
+    StartMainTimer()
 }
 function CreateMenu() {
     gameState.state.physics.add.image(50, 120, 'MenuMenu');
-    var menuBuildingCity = gameState.state.physics.add.image(50, 50, 'BuildingCity').setInteractive();
-    menuBuildingCity.on('pointerup', function (pointer) {
+    CreateMenuItem(50, 50, 'BuildingCity');
+    CreateMenuItem(50, 90, 'BuildingFarm');
+    CreateMenuItem(50, 130, 'BuildingRoadLeftRight');
+}
+function CreateMenuItem(x,y,type) {
+    var menuBuilding = gameState.state.physics.add.image(x, y, type).setInteractive();
+    menuBuilding.on('pointerup', function (pointer) {
+        gameState.map.off('pointerup');
         gameState.map.on('pointerup', function (pointer) {
-            PlaceBuilding(pointer, "BuildingCity");
+            PlaceBuilding(pointer, type);
         });
     });
-
-    var menuBuildingFarm = gameState.state.physics.add.image(50, 90, 'BuildingFarm').setInteractive();
-    menuBuildingFarm.on('pointerup', function (pointer) {
-        gameState.map.on('pointerup', function (pointer) {
-            PlaceBuilding(pointer,"BuildingFarm");
-        });
-    });
-
-    var menuBuildingRoad = gameState.state.physics.add.image(50, 130, 'BuildingRoadLeftRight').setInteractive();
-    menuBuildingRoad.on('pointerup', function (pointer) {
-        gameState.map.on('pointerup', function (pointer) {
-            PlaceBuilding(pointer, "BuildingRoadLeftRight");
-        });
-    });
-
-    //var menuBuildingForest = gameState.state.physics.add.image(50, 170, 'BuildingForest').setInteractive();
-    //menuBuildingForest.on('pointerup', function (pointer) {
-    //    gameState.map.on('pointerup', function (pointer) {
-    //        PlaceBuilding(pointer, "BuildingForest");
-    //    });
-    //});
-    //TODO remove menu item events when click on different menu item
 }
 function CreateTileHighlighter() {
     var graphics = gameState.state.add.graphics({ lineStyle: { width: 2, color: 0xffffff } });
@@ -94,16 +78,48 @@ function CreateTileHighlighter() {
     });
     
 }
-function PlaceBuilding(pointer,BuildingName) {
-    console.log(gameState.GetSelectedTile(pointer.upX, pointer.upY));
+function PlaceBuilding(pointer, BuildingName) {
+    //TODO check tile for existing building
     var selectedTile = gameState.GetSelectedTile(pointer.upX, pointer.upY);
     if (selectedTile.tileType !== "Water") {
-        selectedTile.building = BuildingName;
-        var tempCity = new City();
-        tempCity.name = "City1";
-        tempCity.population = 500;
-        tempCity.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
-        gameState.cities.push(tempCity);
-        console.log(gameState);
+        switch (BuildingName) {
+            case "BuildingCity":
+                selectedTile.building = BuildingName;
+                var tempCity = new City();
+                tempCity.name = "Populi";
+                tempCity.buildingType = BuildingName;
+                tempCity.population = 500;
+                tempCity.foodReserve = 1000;
+                tempCity.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
+                tempCity.tile = selectedTile;
+                gameState.buildings.push(tempCity);
+                selectedTile.buildingReference = tempCity;
+                break;
+            case "BuildingFarm":
+                var tempBuilding = new Building();
+                tempBuilding.name = BuildingName;
+                tempBuilding.buildingType = BuildingName;
+                tempBuilding.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
+                tempBuilding.tile = selectedTile;
+                gameState.buildings.push(tempBuilding);
+                selectedTile.buildingReference = tempBuilding;
+                break;
+            case "BuildingRoad":
+                break;
+        }
+        console.log(gameState.buildings);
+
     }
+}
+//Main Timer
+var mainTimer;
+function StartMainTimer() {
+    mainTimer = setInterval(function () { PerformMainTimerTick(); }, 5000);
+}
+function StopMainTimer() {
+    mainTimer.clearInterval();
+}
+function PerformMainTimerTick() {
+    console.log("day passed");
+    gameState.PerformTick();
 }

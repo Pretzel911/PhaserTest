@@ -9,7 +9,7 @@
         this.width = null;
         this.height = null;
         this.tileType = null;//"Water" or "Land"
-        this.building = null;
+        this.buildingReference = null;
     }
     xMid() {
         return this.xStart + (this.width / 2);
