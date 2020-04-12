@@ -12,7 +12,7 @@
         switch (this.GrowthRate) {
             case "meager":
                 if (this.foodReserve > .5 * (this.population)) {
-                    this.population = this.population * (0.2);
+                    this.population += this.population * (0.2);
                     this.foodReserve -= .5 * (this.population);
                 }
                 else {
@@ -22,7 +22,7 @@
                 break;
             case "abundant":
                 if (this.foodReserve > (2.5 * this.population)) {
-                    this.population = this.population * (0.10);
+                    this.population += this.population * (0.10);
                     this.foodReserve -= 2.5 * (this.population);
                 }
                 else {
@@ -32,7 +32,7 @@
                 break;
             case "standard":
                 if (this.foodReserve > (this.population)) {
-                    this.population = this.population * (0.05);
+                    this.population += this.population * (0.05);
                     this.foodReserve -= this.population;
                 }
                 else {
