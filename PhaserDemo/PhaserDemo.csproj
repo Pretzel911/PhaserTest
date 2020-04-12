@@ -133,6 +133,17 @@
   <ItemGroup>
     <Content Include="GameAssets\Images\Building\City.png" />
     <Content Include="GameAssets\Images\Building\Farm.png" />
+    <Content Include="GameAssets\Images\Building\Road3WayLeftBottomRight.png" />
+    <Content Include="GameAssets\Images\Building\Road3WayLeftTopBottom.png" />
+    <Content Include="GameAssets\Images\Building\Road3WayLeftTopRight.png" />
+    <Content Include="GameAssets\Images\Building\Road3WayTopBottomRight.png" />
+    <Content Include="GameAssets\Images\Building\RoadCrossRoad.png" />
+    <Content Include="GameAssets\Images\Building\RoadLeftBottom.png" />
+    <Content Include="GameAssets\Images\Building\RoadLeftRight.png" />
+    <Content Include="GameAssets\Images\Building\RoadRightBottom.png" />
+    <Content Include="GameAssets\Images\Building\RoadRightTop.png" />
+    <Content Include="GameAssets\Images\Building\RoadTopBottom.png" />
+    <Content Include="GameAssets\Images\Building\RoadTopLeft.png" />
     <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="GameAssets\Images\Menu\Menu.png" />
     <Content Include="GameAssets\Javascript\Classes\City.js" />
