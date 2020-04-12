@@ -19,8 +19,18 @@ class GameState {
         this.state = null;
         this.menu = null;
         this.map = null;
+        this.cities = new Array();
     }
 }
+class City {
+    constructor(){
+        this.name = "";
+        this.population = 0;
+        this.graphic = null;
+        this.citiesFarm = new Array();
+    }
+}
+
 var gameState = new GameState();
 var game = new Phaser.Game(config);
 
@@ -55,5 +65,11 @@ function CreateMenu() {
     //menu.add(menuBuildingFarm);
 }
 function PlaceBuilding(pointer,BuildingName) {
-    gameState.state.physics.add.image(pointer.upX, pointer.upY, BuildingName);
+
+    var tempCity = new City();
+    tempCity.name = "City1";
+    tempCity.population = 500;
+    tempCity.graphic = gameState.state.physics.add.image(pointer.upX, pointer.upY, BuildingName);
+    gameState.cities.push(tempCity);
+    console.log(gameState);   
 }
