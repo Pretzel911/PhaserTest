@@ -28,6 +28,7 @@ function create() {
     gameState.map = this.add.sprite(960, 540, 'MapMap').setInteractive();
     gameState.state = this;
     CreateMenu();
+    CreateTileHighlighter();
     console.log(gameState);
 }
 function CreateMenu() {
@@ -45,6 +46,25 @@ function CreateMenu() {
             PlaceBuilding(pointer,"BuildingFarm");
         });
     });
+}
+function CreateTileHighlighter() {
+    var graphics = gameState.state.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 }, fillStyle: { color: 0x0000aa } });
+    var rect = new Phaser.Geom.Rectangle();
+    gameState.state.input.on('pointermove', function (pointer) {
+        console.log("StartLooking");
+        graphics.clear();
+        var selectedTile = gameState.GetSelectedTile(pointer.x, pointer.y);
+        console.log("x: " + pointer.upX + "y: " + pointer.upY);
+        console.log("x: " +selectedTile.x + "y: "+selectedTile.y);
+        rect.x = selectedTile.xStart;
+        rect.y = selectedTile.yStart;
+        rect.width = selectedTile.width;
+        rect.height = selectedTile.height;
+        var area = Phaser.Geom.Rectangle.Area(rect);
+        graphics.strokeRectShape(rect);
+        console.log("FinishLooking");
+    });
+    
 }
 function PlaceBuilding(pointer,BuildingName) {
     console.log(gameState.GetSelectedTile(pointer.upX, pointer.upY));
