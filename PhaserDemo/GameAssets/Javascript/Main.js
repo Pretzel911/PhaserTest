@@ -38,6 +38,7 @@ function preload() {
     this.load.image('TerrainMountainCopper', 'GameAssets/Images/Terrain/MountainCopper.png');
     this.load.image('TerrainMountainIron', 'GameAssets/Images/Terrain/MountainIron.png');
     this.load.image('TerrainHorses', 'GameAssets/Images/Terrain/Horses.png');
+    this.load.image('MenuX', 'GameAssets/Images/Menu/X.png')
 }
 
 function create() {
@@ -52,6 +53,7 @@ function CreateMenu() {
     CreateMenuItem(50, 50, 'BuildingCity');
     CreateMenuItem(50, 90, 'BuildingFarm');
     CreateMenuItem(50, 130, 'BuildingRoadLeftRight');
+    ClearSelectedItem(50, 170)
 }
 function CreateMenuItem(x,y,type) {
     var menuBuilding = gameState.state.physics.add.image(x, y, type).setInteractive();
@@ -60,6 +62,12 @@ function CreateMenuItem(x,y,type) {
         gameState.map.on('pointerup', function (pointer) {
             PlaceBuilding(pointer, type);
         });
+    });
+}
+function ClearSelectedItem(x, y) {
+    var menuBuilding = gameState.state.physics.add.image(x, y, "MenuX").setInteractive();
+    menuBuilding.on('pointerup', function (pointer) {
+        gameState.map.off('pointerup');
     });
 }
 function CreateTileHighlighter() {
@@ -81,7 +89,7 @@ function CreateTileHighlighter() {
 function PlaceBuilding(pointer, BuildingName) {
     //TODO check tile for existing building
     var selectedTile = gameState.GetSelectedTile(pointer.upX, pointer.upY);
-    if (selectedTile.tileType !== "Water") {
+    if (selectedTile.tileType !== "Water" && selectedTile.buildingReference === null) {
         switch (BuildingName) {
             case "BuildingCity":
                 selectedTile.building = BuildingName;
@@ -108,7 +116,6 @@ function PlaceBuilding(pointer, BuildingName) {
                 break;
         }
         console.log(gameState.buildings);
-
     }
 }
 //Main Timer

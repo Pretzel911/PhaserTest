@@ -146,6 +146,7 @@
     <Content Include="GameAssets\Images\Building\RoadTopLeft.png" />
     <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="GameAssets\Images\Menu\Menu.png" />
+    <Content Include="GameAssets\Images\Menu\X.png" />
     <Content Include="GameAssets\Images\Terrain\Grass.png" />
     <Content Include="GameAssets\Images\Terrain\Horses.png" />
     <Content Include="GameAssets\Images\Terrain\Jungle.png" />
