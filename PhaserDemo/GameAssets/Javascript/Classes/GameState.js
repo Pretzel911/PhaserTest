@@ -4,7 +4,7 @@
         this.menu = null;
         this.map = null;
         this.buildings = new Array();
-
+        this.CityMenu = new Menu();
         //Tiles Stuff
         this.tiles = null;
         this.tilesXCount = 32;
