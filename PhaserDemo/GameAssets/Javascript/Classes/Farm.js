@@ -1,8 +1,15 @@
-﻿class Farm {
+﻿class Farm extends Building{
     constructor() {
-        this.name = "";
+        super();
         this.workers = 0; //maybe?
-        this.graphic = null;
-        this.foodProduction = 0; //amount of food the farm produces
+        this.foodReserve = 0;
+        this.foodProduction = 5000; //amount of food the farm produces
+        this.city = null;
+    }
+    PerformTick() {
+        this.ProduceFood();
+    }
+    ProduceFood() {
+        this.foodReserve += this.foodProduction;
     }
 }

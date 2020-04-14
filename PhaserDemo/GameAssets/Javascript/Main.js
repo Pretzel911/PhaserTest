@@ -38,7 +38,7 @@ function preload() {
     this.load.image('TerrainMountainCopper', 'GameAssets/Images/Terrain/MountainCopper.png');
     this.load.image('TerrainMountainIron', 'GameAssets/Images/Terrain/MountainIron.png');
     this.load.image('TerrainHorses', 'GameAssets/Images/Terrain/Horses.png');
-    this.load.image('MenuX', 'GameAssets/Images/Menu/X.png')
+    this.load.image('MenuX', 'GameAssets/Images/Menu/X.png');
 }
 
 function create() {
@@ -46,14 +46,14 @@ function create() {
     gameState.state = this;
     CreateMenu();
     CreateTileHighlighter();
-    StartMainTimer()
+    StartMainTimer();
 }
 function CreateMenu() {
     gameState.state.physics.add.image(50, 120, 'MenuMenu');
     CreateMenuItem(50, 50, 'BuildingCity');
     CreateMenuItem(50, 90, 'BuildingFarm');
     CreateMenuItem(50, 130, 'BuildingRoadLeftRight');
-    ClearSelectedItem(50, 170)
+    ClearSelectedItem(50, 170);
 }
 function CreateMenuItem(x,y,type) {
     var menuBuilding = gameState.state.physics.add.image(x, y, type).setInteractive();
@@ -87,46 +87,55 @@ function CreateTileHighlighter() {
     
 }
 function PlaceBuilding(pointer, BuildingName) {
-    //TODO check tile for existing building
     var selectedTile = gameState.GetSelectedTile(pointer.upX, pointer.upY);
     if (selectedTile.tileType !== "Water" && selectedTile.buildingReference === null) {
         switch (BuildingName) {
             case "BuildingCity":
-                selectedTile.building = BuildingName;
-                var tempCity = new City();
-                tempCity.name = "Populi";
-                tempCity.buildingType = BuildingName;
-                tempCity.population = 500;
-                tempCity.foodReserve = 1000;
-                tempCity.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
-                tempCity.tile = selectedTile;
-                gameState.buildings.push(tempCity);
-                selectedTile.buildingReference = tempCity;
+                console.log(gameState.CheckCityExists());
+                if (!gameState.CheckCityExists()) {
+                    selectedTile.building = BuildingName;
+                    var tempCity = new City();
+                    tempCity.name = "Populi";
+                    tempCity.buildingType = BuildingName;
+                    tempCity.population = 500;
+                    tempCity.foodReserve = 1000;
+                    tempCity.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
+                    tempCity.tile = selectedTile;
+                    gameState.buildings.push(tempCity);
+                    selectedTile.buildingReference = tempCity;
+                }
                 break;
             case "BuildingFarm":
-                var tempBuilding = new Building();
+                var tempBuilding = new Farm();
                 tempBuilding.name = BuildingName;
                 tempBuilding.buildingType = BuildingName;
-                tempBuilding.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
                 tempBuilding.tile = selectedTile;
-                gameState.buildings.push(tempBuilding);
-                selectedTile.buildingReference = tempBuilding;
+                tempBuilding.city = gameState.GetBuildingCity(tempBuilding);
+                if (tempBuilding.city !== null) { //no city no building!
+                    tempBuilding.graphic = gameState.state.physics.add.image(selectedTile.xMid(), selectedTile.yMid(), BuildingName);
+                    gameState.buildings.push(tempBuilding);
+                    tempBuilding.city.resourceBuildings.push(tempBuilding);
+                    selectedTile.buildingReference = tempBuilding;
+                }
+                else {
+                    //hey uhh, you can't build a farm without a city numbnuts
+                }
                 break;
             case "BuildingRoad":
                 break;
         }
-        console.log(gameState.buildings);
     }
 }
 //Main Timer
 var mainTimer;
 function StartMainTimer() {
-    mainTimer = setInterval(function () { PerformMainTimerTick(); }, 24000);
+    mainTimer = setInterval(function () { PerformMainTimerTick(); }, 5000);
 }
 function StopMainTimer() {
     mainTimer.clearInterval();
 }
 function PerformMainTimerTick() {
-    console.log("day passed");
     gameState.PerformTick();
+    console.log("day passed");
+    console.log(gameState.buildings);
 }

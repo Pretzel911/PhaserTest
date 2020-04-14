@@ -5,6 +5,8 @@
         this.map = null;
         this.buildings = new Array();
 
+        this.player = new Player();
+
         //Tiles Stuff
         this.tiles = null;
         this.tilesXCount = 32;
@@ -47,13 +49,30 @@
             }
         }
     }
+    CheckCityExists() {
+        for (var i = 0; i < this.buildings.length; i++) {
+            if (this.buildings[i].buildingType === "BuildingCity") {
+                return true
+            }
+        }
+        return false;//no cities!
+    }
+    GetBuildingCity(building) {
+        for (var i = 0; i < this.buildings.length; i++) {
+            if (this.buildings[i].buildingType === "BuildingCity") {
+                return this.buildings[i];
+            }
+        }
+        return null;//no cities!
+    }
     //Tick Events
     PerformTick() {
         for (var i = 0; i < this.buildings.length; i++) {
-            if (this.buildings[i].buildingType === "BuildingCity") {
-                this.buildings[i].PerformCityTick();
-                console.log(this.buildings[i]);
-            }
+            this.buildings[i].PerformTick();
         }
+        this.HandleTransfers();
+    }
+    HandleTransfers() {
+
     }
 }

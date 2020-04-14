@@ -158,6 +158,7 @@
     <Content Include="GameAssets\Javascript\Classes\City.js" />
     <Content Include="GameAssets\Javascript\Classes\Farm.js" />
     <Content Include="GameAssets\Javascript\Classes\GameState.js" />
+    <Content Include="GameAssets\Javascript\Classes\Player.js" />
     <Content Include="GameAssets\Javascript\Classes\Tile.js" />
     <Content Include="GameAssets\Javascript\Main.js" />
     <Content Include="Global.asax" />

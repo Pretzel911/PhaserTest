@@ -4,9 +4,17 @@
         this.population = 0;
         this.foodReserve = 0;
         this.GrowthRate = "standard"; //Set cities growth rate, changes population growth formula (meager, standard, abundant) Use more food to increase population growth rate
+        this.resourceBuildings = [];
     }
-    PerformCityTick() {
+    PerformTick() {
+        this.CollectResources();
         this.PerformPopulationGrowth();
+    }
+    CollectResources() {
+        for (var i = 0; i < this.resourceBuildings.length; i++) {
+            this.foodReserve += this.resourceBuildings[i].foodReserve;
+            this.resourceBuildings[i].foodReserve = 0;
+        }
     }
     //Run this to make city population to grow
     PerformPopulationGrowth() {

@@ -5,4 +5,7 @@
         this.buildingType = null;
         this.tile = null;
     }
+    PerformTick() {
+        //placeholder
+    }
 } 
