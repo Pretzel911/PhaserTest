@@ -146,6 +146,7 @@
     <Content Include="GameAssets\Images\Building\RoadTopLeft.png" />
     <Content Include="GameAssets\Images\Map\Map.png" />
     <Content Include="GameAssets\Images\Menu\Menu.png" />
+    <Content Include="GameAssets\Images\Menu\MenuCity.png" />
     <Content Include="GameAssets\Images\Menu\X.png" />
     <Content Include="GameAssets\Images\Terrain\Grass.png" />
     <Content Include="GameAssets\Images\Terrain\Horses.png" />
@@ -158,6 +159,7 @@
     <Content Include="GameAssets\Javascript\Classes\City.js" />
     <Content Include="GameAssets\Javascript\Classes\Farm.js" />
     <Content Include="GameAssets\Javascript\Classes\GameState.js" />
+    <Content Include="GameAssets\Javascript\Classes\Menu.js" />
     <Content Include="GameAssets\Javascript\Classes\Player.js" />
     <Content Include="GameAssets\Javascript\Classes\Tile.js" />
     <Content Include="GameAssets\Javascript\Main.js" />

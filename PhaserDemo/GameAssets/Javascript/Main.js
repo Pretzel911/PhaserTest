@@ -16,6 +16,8 @@
 
 var gameState = new GameState();
 var game = new Phaser.Game(config);
+var scoreText;
+
 
 function preload() {
     this.load.image('MapMap', 'GameAssets/Images/Map/Map.png');
@@ -39,6 +41,7 @@ function preload() {
     this.load.image('TerrainMountainIron', 'GameAssets/Images/Terrain/MountainIron.png');
     this.load.image('TerrainHorses', 'GameAssets/Images/Terrain/Horses.png');
     this.load.image('MenuX', 'GameAssets/Images/Menu/X.png');
+    this.load.image('MenuCity', 'GameAssets/Images/Menu/MenuCity.png');
 }
 
 function create() {
@@ -55,7 +58,7 @@ function CreateMenu() {
     CreateMenuItem(50, 130, 'BuildingRoadLeftRight');
     ClearSelectedItem(50, 170);
 }
-function CreateMenuItem(x,y,type) {
+function CreateMenuItem(x, y, type) {
     var menuBuilding = gameState.state.physics.add.image(x, y, type).setInteractive();
     menuBuilding.on('pointerup', function (pointer) {
         gameState.map.off('pointerup');
@@ -68,8 +71,12 @@ function ClearSelectedItem(x, y) {
     var menuBuilding = gameState.state.physics.add.image(x, y, "MenuX").setInteractive();
     menuBuilding.on('pointerup', function (pointer) {
         gameState.map.off('pointerup');
+        gameState.map.on('pointerup', function (pointer) {
+            OpenCityMenu(pointer);
+        });
     });
 }
+
 function CreateTileHighlighter() {
     var graphics = gameState.state.add.graphics({ lineStyle: { width: 2, color: 0xffffff } });
     var rect = new Phaser.Geom.Rectangle();
@@ -83,8 +90,26 @@ function CreateTileHighlighter() {
         var area = Phaser.Geom.Rectangle.Area(rect);
         graphics.fillStyle(0xFFFFFF, .5);
         graphics.fillRectShape(rect);
-    });
-    
+    });    
+}
+function OpenCityMenu(pointer) {
+    var selectedTile = gameState.GetSelectedTile(pointer.upX, pointer.upY);
+    if (gameState.CityMenu.open)
+    {
+        gameState.CityMenu.destroyMenu();
+    }
+    if (selectedTile.buildingReference !== null && selectedTile.buildingReference.buildingType === "BuildingCity")
+    {
+        var tempMenu = new Menu();
+        tempMenu.graphic = gameState.state.physics.add.image(pointer.upX + 110, pointer.upY + 80, 'MenuCity');
+        tempMenu.open = true;
+        gameState.CityMenu = tempMenu;
+        //items to add
+        tempMenu.addMenuItemText(tempMenu.graphic.x - 80, tempMenu.graphic.y - 90, 'Name:' + selectedTile.buildingReference.name, gameState.state);
+        tempMenu.addMenuItemText(tempMenu.graphic.x - 80, tempMenu.graphic.y - 70, 'Pop:' + selectedTile.buildingReference.population, gameState.state);
+        tempMenu.addMenuItemText(tempMenu.graphic.x - 80, tempMenu.graphic.y - 50, 'Food:' + selectedTile.buildingReference.foodReserve, gameState.state);
+    }
+    //menuBuilding.disableBody(true, true);
 }
 function PlaceBuilding(pointer, BuildingName) {
     var selectedTile = gameState.GetSelectedTile(pointer.upX, pointer.upY);

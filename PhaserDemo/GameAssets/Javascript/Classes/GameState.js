@@ -4,6 +4,7 @@
         this.menu = null;
         this.map = null;
         this.buildings = new Array();
+        this.CityMenu = new Menu();
 
         this.player = new Player();
 
